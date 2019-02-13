@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Navbar from "./components/Navbar";
+import Form from "./components/Form";
+import "./App.css";
 
 class App extends Component {
+  state = {
+    forms: {}
+  };
+
+  addForm = form => {
+    const forms = { ...this.state.forms };
+    forms[`form${Date.now()}`] = form;
+    this.setState({
+      forms
+    });
+  };
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <Navbar />
+        <Form history={this.props.history} addForm={this.addForm} />
+      </>
     );
   }
 }
