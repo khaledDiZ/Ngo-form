@@ -210,7 +210,7 @@ class TextFields extends React.Component {
               multiple
               type="file"
             />
-            وثيقة مصدقة تؤيد كون المنظمة الاجنبية الأم مسجلة في بلدها كمنظمة غي
+            وثيقة مصدقة تؤيد كون المنظمة الاجنبية الأم مسجلة في بلدها كمنظمة غير
             حكومية وغير ربحية *
             <label htmlFor="contained-button-file">
               <Button
