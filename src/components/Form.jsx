@@ -3,6 +3,16 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const styles = theme => ({
   textField: {
@@ -16,10 +26,48 @@ const styles = theme => ({
   },
   input: {
     display: "none"
+  },
+  root: {
+    width: "100%",
+    marginTop: theme.spacing.unit * 3,
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 700
+  },
+  addbutton: {
+    margin: theme.spacing.unit,
+    float: "left",
+    marginTop: "20px"
   }
 });
 
+let id = 0;
+function createData(name, email, nathonaltes, phone) {
+  id += 1;
+  return { id, name, email, nathonaltes, phone };
+}
+
+const rows = [
+  createData("ahmed", "ahmed@email.com", "iraq", 770000000),
+  createData("ahmed", "ahmed@email.com", "iraq", 770000000),
+  createData("ahmed", "ahmed@email.com", "iraq", 770000000),
+  createData("ahmed", "ahmed@email.com", "iraq", 770000000),
+  createData("ahmed", "ahmed@email.com", "iraq", 770000000)
+];
+
 class TextFields extends React.Component {
+  state = {
+    open: false
+  };
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   adressRef = React.createRef();
   orgNameArRef = React.createRef();
   orgNameEnRef = React.createRef();
@@ -197,6 +245,82 @@ class TextFields extends React.Component {
             margin="normal"
           />
           <hr />
+        </div>
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.addbutton}
+            onClick={this.handleClickOpen}
+          >
+            اضافة موظف
+          </Button>
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">اضافة موظف</DialogTitle>
+            <DialogContent>
+              <TextField
+                id="text"
+                label="البريد الالكتروني"
+                className={classes.textField}
+                margin="normal"
+              />
+              <TextField
+                id="text"
+                label="الاسم"
+                className={classes.textField}
+                margin="normal"
+              />
+              <TextField
+                id="text"
+                label="جنسية الموظف"
+                className={classes.textField}
+                margin="normal"
+              />
+              <TextField
+                id="text"
+                label="رقم الهاتف"
+                className={classes.textField}
+                margin="normal"
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                الغاء
+              </Button>
+              <Button onClick={this.handleClose} color="primary">
+                اضافة
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <h3 className="employee"> الموظفين</h3>
+          <Paper className={classes.root}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="right">جنسية الموظف</TableCell>
+                  <TableCell align="right">رقم الهاتف</TableCell>
+                  <TableCell align="right">البريد الالكتروني</TableCell>
+                  <TableCell align="right">اسم الموظف</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map(row => (
+                  <TableRow key={row.id}>
+                    <TableCell align="right" component="th" scope="row">
+                      {row.nathonaltes}
+                    </TableCell>
+                    <TableCell align="right">{row.phone}</TableCell>
+                    <TableCell align="right">{row.email}</TableCell>
+                    <TableCell align="right">{row.name}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
         </div>
         <div className="docs">
           <h3>الوثائق</h3>

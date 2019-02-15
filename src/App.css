@@ -18,7 +18,7 @@ form {
 }
 
 body {
-  background-color: #f3eeee;
+  background-color: white;
 }
 h3 {
   margin-right: 20px;
@@ -36,6 +36,7 @@ hr {
 .not-container {
   display: flex;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .submit {
@@ -44,4 +45,9 @@ hr {
 
 .submit-header {
   text-align: center;
+}
+
+.employee {
+  margin-right: 20px;
+  display: inline-block;
 }
